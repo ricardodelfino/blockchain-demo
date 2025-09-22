@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Block - Blockchain Demo</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap-horizon.css">
+    <link rel="stylesheet" href="stylesheets/lib/ladda-themeless.min.css">
+    <link rel="stylesheet" href="stylesheets/blockchain.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <!-- This is the main container for our blockchain demo -->
+    <div class="container">
+        <!-- Header section with title -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Blockchain Demo</h1>
+                <p class="lead">Block</p>
+                <p><small>Created by <a href="https://github.com/anders94" target="_blank">Anders Brownworth</a> - <a href="https://github.com/anders94/blockchain-demo" target="_blank">Source Code</a></small></p>
+            </div>
+        </div>
+
+        <!-- Navigation section -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="index.html">Home</a></li>
+                    <li role="presentation"><a href="hash.html">Hash</a></li>
+                    <li role="presentation" class="active"><a href="block.html">Block</a></li>
+                    <li role="presentation"><a href="blockchain.html">Blockchain</a></li>
+                    <li role="presentation"><a href="distributed.html">Distributed</a></li>
+                    <li role="presentation"><a href="tokens.html">Tokens</a></li>
+                    <li role="presentation"><a href="coinbase.html">Coinbase</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main content section -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Block explanation -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">What is a Block?</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>A block in a blockchain contains:</p>
+                        <ul>
+                            <li><strong>Block Number</strong>: The position of the block in the chain</li>
+                            <li><strong>Nonce</strong>: A number used once in the mining process</li>
+                            <li><strong>Data</strong>: The information stored in the block (transactions, etc.)</li>
+                            <li><strong>Hash</strong>: A unique identifier created from the block's contents</li>
+                        </ul>
+                        <p>Mining a block means finding a hash that meets certain criteria (like starting with a specific number of zeros). This is done by changing the nonce until a valid hash is found.</p>
+                    </div>
+                </div>
+
+                <!-- Block demo -->
+                <div class="panel panel-default" id="block1chain1well">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Block Demo</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="block1chain1nonce">Nonce</label>
+                                    <input type="text" class="form-control" id="block1chain1nonce" value="72608">
+                                </div>
+                                <div class="form-group">
+                                    <label for="block1chain1data">Data</label>
+                                    <textarea class="form-control" id="block1chain1data" rows="10">Hello, World!</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary" id="mineButton">Mine Block</button>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="block1chain1hash">Hash</label>
+                                    <input type="text" class="form-control" id="block1chain1hash" readonly>
+                                </div>
+                                <div class="alert alert-info">
+                                    <p>The hash must start with <span id="difficulty">0000</span> to be considered valid (mined).</p>
+                                    <p>Try changing the data and see how it affects the hash. You'll need to mine the block again to find a valid hash.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub ribbon -->
+    <a href="https://github.com/ricardodelfino/blockchain-demo" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="images/fork-me-on-github-ribbon.png" alt="Fork me on GitHub"></a>
+
+    <!-- JavaScript libraries -->
+    <script src="javascripts/lib/jquery.min.js"></script>
+    <script src="javascripts/lib/bootstrap.min.js"></script>
+    <script src="javascripts/lib/spin.min.js"></script>
+    <script src="javascripts/lib/ladda.min.js"></script>
+    <script src="javascripts/lib/ie10-viewport-bug-workaround.js"></script>
+    <script src="javascripts/lib/sha256.js"></script>
+    
+    <!-- Block demo script -->
+    <script>
+        // Global variables for difficulty
+        var difficultyMajor = 4; // number of zeros required at front of hash
+        var difficultyMinor = 15; // 0-15, maximum value of the hex digit after the front
+        var maximumNonce = 8; // limit the nonce so we don't mine too long
+        var pattern = '';
+        
+        // Set up the difficulty pattern
+        for (var x=0; x<difficultyMajor; x++) {
+            pattern += '0';
+            maximumNonce *= 16;
+        }
+        pattern += difficultyMinor.toString(16);
+        var patternLen = pattern.length;
+        
+        // Adjust maximumNonce based on difficultyMinor
+        if (difficultyMinor == 0) { maximumNonce *= 16; }
+        else if (difficultyMinor == 1) { maximumNonce *= 8; }
+        else if (difficultyMinor <= 3) { maximumNonce *= 4; }
+        else if (difficultyMinor <= 7) { maximumNonce *= 2; }
+        
+        // Function to get text from the block
+        function getText() {
+            return $('#block1chain1nonce').val() + $('#block1chain1data').val();
+        }
+        
+        // Function to calculate SHA-256 hash
+        function sha256() {
+            return CryptoJS.SHA256(getText()).toString();
+        }
+        
+        // Function to update the block state (valid/invalid)
+        function updateState() {
+            if ($('#block1chain1hash').val().substr(0, patternLen) <= pattern) {
+                $('#block1chain1well').removeClass('panel-danger').addClass('panel-success');
+            } else {
+                $('#block1chain1well').removeClass('panel-success').addClass('panel-danger');
+            }
+        }
+        
+        // Function to update the hash
+        function updateHash() {
+            $('#block1chain1hash').val(sha256());
+            updateState();
+        }
+        
+        // Function to mine the block
+        function mine() {
+            var button = $('#mineButton');
+            button.prop('disabled', true);
+            button.text('Mining...');
+            
+            // Use setTimeout to avoid freezing the UI
+            setTimeout(function() {
+                for (var x = 0; x <= maximumNonce; x++) {
+                    $('#block1chain1nonce').val(x);
+                    $('#block1chain1hash').val(sha256());
+                    if ($('#block1chain1hash').val().substr(0, patternLen) <= pattern) {
+                        updateState();
+                        break;
+                    }
+                }
+                button.prop('disabled', false);
+                button.text('Mine Block');
+            }, 100);
+        }
+        
+        // Initialize when the page loads
+        $(document).ready(function() {
+            // Display the difficulty
+            $('#difficulty').text(pattern);
+            
+            // Calculate initial hash
+            updateHash();
+            
+            // Update hash when data or nonce changes
+            $('#block1chain1data, #block1chain1nonce').on('input', function() {
+                updateHash();
+            });
+            
+            // Mine button click handler
+            $('#mineButton').click(function() {
+                mine();
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blockchain - Blockchain Demo</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap-horizon.css">
+    <link rel="stylesheet" href="stylesheets/lib/ladda-themeless.min.css">
+    <link rel="stylesheet" href="stylesheets/blockchain.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <!-- This is the main container for our blockchain demo -->
+    <div class="container">
+        <!-- Header section with title -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Blockchain Demo</h1>
+                <p class="lead">Blockchain</p>
+                <p><small>Created by <a href="https://github.com/anders94" target="_blank">Anders Brownworth</a> - <a href="https://github.com/anders94/blockchain-demo" target="_blank">Source Code</a></small></p>
+            </div>
+        </div>
+
+        <!-- Navigation section -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="index.html">Home</a></li>
+                    <li role="presentation"><a href="hash.html">Hash</a></li>
+                    <li role="presentation"><a href="block.html">Block</a></li>
+                    <li role="presentation" class="active"><a href="blockchain.html">Blockchain</a></li>
+                    <li role="presentation"><a href="distributed.html">Distributed</a></li>
+                    <li role="presentation"><a href="tokens.html">Tokens</a></li>
+                    <li role="presentation"><a href="coinbase.html">Coinbase</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main content section -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Blockchain explanation -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">What is a Blockchain?</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>A blockchain is a chain of blocks linked together by including the hash of the previous block in the current block. This creates a chain of blocks that cannot be tampered with without invalidating all subsequent blocks.</p>
+                        <p>Key features of a blockchain:</p>
+                        <ul>
+                            <li><strong>Previous Hash</strong>: Each block contains the hash of the previous block</li>
+                            <li><strong>Immutability</strong>: Changing data in one block invalidates all subsequent blocks</li>
+                            <li><strong>Chain Integrity</strong>: The entire chain can be verified by checking each block's hash</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Blockchain demo -->
+                <div class="row">
+                    <!-- Block 1 -->
+                    <div class="col-md-4">
+                        <div class="panel panel-default" id="block1chain1well">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Block 1</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="block1chain1nonce">Nonce</label>
+                                    <input type="text" class="form-control" id="block1chain1nonce" value="11316">
+                                </div>
+                                <div class="form-group">
+                                    <label for="block1chain1data">Data</label>
+                                    <textarea class="form-control" id="block1chain1data" rows="4">First block data</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="block1chain1hash">Hash</label>
+                                    <input type="text" class="form-control" id="block1chain1hash" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-sm" id="mineButton1">Mine</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Block 2 -->
+                    <div class="col-md-4">
+                        <div class="panel panel-default" id="block2chain1well">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Block 2</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="block2chain1previous">Previous</label>
+                                    <input type="text" class="form-control" id="block2chain1previous" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="block2chain1nonce">Nonce</label>
+                                    <input type="text" class="form-control" id="block2chain1nonce" value="35230">
+                                </div>
+                                <div class="form-group">
+                                    <label for="block2chain1data">Data</label>
+                                    <textarea class="form-control" id="block2chain1data" rows="4">Second block data</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="block2chain1hash">Hash</label>
+                                    <input type="text" class="form-control" id="block2chain1hash" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-sm" id="mineButton2">Mine</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Block 3 -->
+                    <div class="col-md-4">
+                        <div class="panel panel-default" id="block3chain1well">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Block 3</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="form-group">
+                                    <label for="block3chain1previous">Previous</label>
+                                    <input type="text" class="form-control" id="block3chain1previous" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <label for="block3chain1nonce">Nonce</label>
+                                    <input type="text" class="form-control" id="block3chain1nonce" value="12937">
+                                </div>
+                                <div class="form-group">
+                                    <label for="block3chain1data">Data</label>
+                                    <textarea class="form-control" id="block3chain1data" rows="4">Third block data</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="block3chain1hash">Hash</label>
+                                    <input type="text" class="form-control" id="block3chain1hash" readonly>
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-primary btn-sm" id="mineButton3">Mine</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-info">
+                            <p>Try changing the data in Block 1 and see how it affects the entire blockchain. You'll need to mine each block again to make the chain valid.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub ribbon -->
+    <a href="https://github.com/ricardodelfino/blockchain-demo" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="images/fork-me-on-github-ribbon.png" alt="Fork me on GitHub"></a>
+
+    <!-- JavaScript libraries -->
+    <script src="javascripts/lib/jquery.min.js"></script>
+    <script src="javascripts/lib/bootstrap.min.js"></script>
+    <script src="javascripts/lib/spin.min.js"></script>
+    <script src="javascripts/lib/ladda.min.js"></script>
+    <script src="javascripts/lib/ie10-viewport-bug-workaround.js"></script>
+    <script src="javascripts/lib/sha256.js"></script>
+    
+    <!-- Blockchain demo script -->
+    <script>
+        // Global variables for difficulty
+        var difficultyMajor = 4; // number of zeros required at front of hash
+        var difficultyMinor = 15; // 0-15, maximum value of the hex digit after the front
+        var maximumNonce = 8; // limit the nonce so we don't mine too long
+        var pattern = '';
+        
+        // Set up the difficulty pattern
+        for (var x=0; x<difficultyMajor; x++) {
+            pattern += '0';
+            maximumNonce *= 16;
+        }
+        pattern += difficultyMinor.toString(16);
+        var patternLen = pattern.length;
+        
+        // Adjust maximumNonce based on difficultyMinor
+        if (difficultyMinor == 0) { maximumNonce *= 16; }
+        else if (difficultyMinor == 1) { maximumNonce *= 8; }
+        else if (difficultyMinor <= 3) { maximumNonce *= 4; }
+        else if (difficultyMinor <= 7) { maximumNonce *= 2; }
+        
+        // Function to get text from a block
+        function getText(block) {
+            if (block > 1) {
+                return $('#block'+block+'chain1previous').val() + 
+                       $('#block'+block+'chain1nonce').val() + 
+                       $('#block'+block+'chain1data').val();
+            } else {
+                return $('#block'+block+'chain1nonce').val() + 
+                       $('#block'+block+'chain1data').val();
+            }
+        }
+        
+        // Function to calculate SHA-256 hash for a block
+        function sha256(block) {
+            return CryptoJS.SHA256(getText(block)).toString();
+        }
+        
+        // Function to update the block state (valid/invalid)
+        function updateState(block) {
+            if ($('#block'+block+'chain1hash').val().substr(0, patternLen) <= pattern) {
+                $('#block'+block+'chain1well').removeClass('panel-danger').addClass('panel-success');
+            } else {
+                $('#block'+block+'chain1well').removeClass('panel-success').addClass('panel-danger');
+            }
+        }
+        
+        // Function to update the hash for a block
+        function updateHash(block) {
+            $('#block'+block+'chain1hash').val(sha256(block));
+            updateState(block);
+        }
+        
+        // Function to update the entire blockchain
+        function updateChain() {
+            for (var x = 1; x <= 3; x++) {
+                if (x > 1) {
+                    $('#block'+x+'chain1previous').val($('#block'+(x-1).toString()+'chain1hash').val());
+                }
+                updateHash(x);
+            }
+        }
+        
+        // Function to mine a specific block
+        function mine(block) {
+            var button = $('#mineButton'+block);
+            button.prop('disabled', true);
+            button.text('Mining...');
+            
+            // Use setTimeout to avoid freezing the UI
+            setTimeout(function() {
+                for (var x = 0; x <= maximumNonce; x++) {
+                    $('#block'+block+'chain1nonce').val(x);
+                    $('#block'+block+'chain1hash').val(sha256(block));
+                    if ($('#block'+block+'chain1hash').val().substr(0, patternLen) <= pattern) {
+                        updateState(block);
+                        // Update subsequent blocks if this is part of a chain
+                        for (var y = block+1; y <= 3; y++) {
+                            $('#block'+y+'chain1previous').val($('#block'+(y-1).toString()+'chain1hash').val());
+                            updateHash(y);
+                        }
+                        break;
+                    }
+                }
+                button.prop('disabled', false);
+                button.text('Mine');
+            }, 100);
+        }
+        
+        // Initialize when the page loads
+        $(document).ready(function() {
+            // Calculate initial hashes and update the chain
+            updateChain();
+            
+            // Update hashes when data or nonce changes
+            $('#block1chain1data, #block1chain1nonce').on('input', function() {
+                updateChain();
+            });
+            
+            $('#block2chain1data, #block2chain1nonce').on('input', function() {
+                updateHash(2);
+                $('#block3chain1previous').val($('#block2chain1hash').val());
+                updateHash(3);
+            });
+            
+            $('#block3chain1data, #block3chain1nonce').on('input', function() {
+                updateHash(3);
+            });
+            
+            // Mine button click handlers
+            $('#mineButton1').click(function() { mine(1); });
+            $('#mineButton2').click(function() { mine(2); });
+            $('#mineButton3').click(function() { mine(3); });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Distributed - Blockchain Demo</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap-horizon.css">
+    <link rel="stylesheet" href="stylesheets/lib/ladda-themeless.min.css">
+    <link rel="stylesheet" href="stylesheets/blockchain.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <!-- This is the main container for our blockchain demo -->
+    <div class="container">
+        <!-- Header section with title -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Blockchain Demo</h1>
+                <p class="lead">Distributed Blockchain</p>
+                <p><small>Created by <a href="https://github.com/anders94" target="_blank">Anders Brownworth</a> - <a href="https://github.com/anders94/blockchain-demo" target="_blank">Source Code</a></small></p>
+            </div>
+        </div>
+
+        <!-- Navigation section -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="index.html">Home</a></li>
+                    <li role="presentation"><a href="hash.html">Hash</a></li>
+                    <li role="presentation"><a href="block.html">Block</a></li>
+                    <li role="presentation"><a href="blockchain.html">Blockchain</a></li>
+                    <li role="presentation" class="active"><a href="distributed.html">Distributed</a></li>
+                    <li role="presentation"><a href="tokens.html">Tokens</a></li>
+                    <li role="presentation"><a href="coinbase.html">Coinbase</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main content section -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Distributed blockchain explanation -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">What is a Distributed Blockchain?</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>A distributed blockchain is a blockchain that is replicated across multiple computers or nodes in a network. Each node maintains its own copy of the blockchain and follows these rules:</p>
+                        <ul>
+                            <li><strong>Consensus</strong>: All nodes agree on the state of the blockchain</li>
+                            <li><strong>Peer-to-Peer</strong>: Nodes communicate directly with each other</li>
+                            <li><strong>Decentralization</strong>: No single node controls the blockchain</li>
+                            <li><strong>Majority Rule</strong>: The longest valid chain is considered the truth</li>
+                        </ul>
+                        <p>This distributed nature makes blockchains resistant to tampering and censorship.</p>
+                    </div>
+                </div>
+
+                <!-- Distributed blockchain demo -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <h3>Peer Network Simulation</h3>
+                        <p>This demo shows three peers (computers) in a blockchain network. Each peer maintains its own copy of the blockchain.</p>
+                        <p>Try changing data in one peer's blockchain and see how it affects the network consensus.</p>
+                    </div>
+                </div>
+                
+                <!-- Tabs for different peers -->
+                <div class="row">
+                    <div class="col-md-12">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active"><a href="#peer1" aria-controls="peer1" role="tab" data-toggle="tab">Peer 1</a></li>
+                            <li role="presentation"><a href="#peer2" aria-controls="peer2" role="tab" data-toggle="tab">Peer 2</a></li>
+                            <li role="presentation"><a href="#peer3" aria-controls="peer3" role="tab" data-toggle="tab">Peer 3</a></li>
+                        </ul>
+                        
+                        <div class="tab-content">
+                            <!-- Peer 1 -->
+                            <div role="tabpanel" class="tab-pane active" id="peer1">
+                                <div class="row" style="margin-top: 20px;">
+                                    <!-- Block 1 -->
+                                    <div class="col-md-4">
+                                        <div class="panel panel-default" id="peer1block1well">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Block 1</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label for="peer1block1nonce">Nonce</label>
+                                                    <input type="text" class="form-control" id="peer1block1nonce" value="11316">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer1block1data">Data</label>
+                                                    <textarea class="form-control" id="peer1block1data" rows="2">First block data</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer1block1hash">Hash</label>
+                                                    <input type="text" class="form-control" id="peer1block1hash" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-sm" id="peer1mineButton1">Mine</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Block 2 -->
+                                    <div class="col-md-4">
+                                        <div class="panel panel-default" id="peer1block2well">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Block 2</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label for="peer1block2previous">Previous</label>
+                                                    <input type="text" class="form-control" id="peer1block2previous" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer1block2nonce">Nonce</label>
+                                                    <input type="text" class="form-control" id="peer1block2nonce" value="35230">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer1block2data">Data</label>
+                                                    <textarea class="form-control" id="peer1block2data" rows="2">Second block data</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer1block2hash">Hash</label>
+                                                    <input type="text" class="form-control" id="peer1block2hash" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-sm" id="peer1mineButton2">Mine</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Peer 2 -->
+                            <div role="tabpanel" class="tab-pane" id="peer2">
+                                <div class="row" style="margin-top: 20px;">
+                                    <!-- Block 1 -->
+                                    <div class="col-md-4">
+                                        <div class="panel panel-default" id="peer2block1well">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Block 1</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label for="peer2block1nonce">Nonce</label>
+                                                    <input type="text" class="form-control" id="peer2block1nonce" value="11316">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer2block1data">Data</label>
+                                                    <textarea class="form-control" id="peer2block1data" rows="2">First block data</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer2block1hash">Hash</label>
+                                                    <input type="text" class="form-control" id="peer2block1hash" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-sm" id="peer2mineButton1">Mine</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Block 2 -->
+                                    <div class="col-md-4">
+                                        <div class="panel panel-default" id="peer2block2well">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Block 2</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label for="peer2block2previous">Previous</label>
+                                                    <input type="text" class="form-control" id="peer2block2previous" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer2block2nonce">Nonce</label>
+                                                    <input type="text" class="form-control" id="peer2block2nonce" value="35230">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer2block2data">Data</label>
+                                                    <textarea class="form-control" id="peer2block2data" rows="2">Second block data</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer2block2hash">Hash</label>
+                                                    <input type="text" class="form-control" id="peer2block2hash" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-sm" id="peer2mineButton2">Mine</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Peer 3 -->
+                            <div role="tabpanel" class="tab-pane" id="peer3">
+                                <div class="row" style="margin-top: 20px;">
+                                    <!-- Block 1 -->
+                                    <div class="col-md-4">
+                                        <div class="panel panel-default" id="peer3block1well">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Block 1</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label for="peer3block1nonce">Nonce</label>
+                                                    <input type="text" class="form-control" id="peer3block1nonce" value="11316">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer3block1data">Data</label>
+                                                    <textarea class="form-control" id="peer3block1data" rows="2">First block data</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer3block1hash">Hash</label>
+                                                    <input type="text" class="form-control" id="peer3block1hash" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-sm" id="peer3mineButton1">Mine</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Block 2 -->
+                                    <div class="col-md-4">
+                                        <div class="panel panel-default" id="peer3block2well">
+                                            <div class="panel-heading">
+                                                <h3 class="panel-title">Block 2</h3>
+                                            </div>
+                                            <div class="panel-body">
+                                                <div class="form-group">
+                                                    <label for="peer3block2previous">Previous</label>
+                                                    <input type="text" class="form-control" id="peer3block2previous" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer3block2nonce">Nonce</label>
+                                                    <input type="text" class="form-control" id="peer3block2nonce" value="35230">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer3block2data">Data</label>
+                                                    <textarea class="form-control" id="peer3block2data" rows="2">Second block data</textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="peer3block2hash">Hash</label>
+                                                    <input type="text" class="form-control" id="peer3block2hash" readonly>
+                                                </div>
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-sm" id="peer3mineButton2">Mine</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Network Controls</h3>
+                            </div>
+                            <div class="panel-body">
+                                <button class="btn btn-success" id="syncButton">Synchronize Network</button>
+                                <div class="alert alert-info" style="margin-top: 10px;">
+                                    <p>Click "Synchronize Network" to simulate how peers in a blockchain network reach consensus by adopting the longest valid chain.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub ribbon -->
+    <a href="https://github.com/ricardodelfino/blockchain-demo" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="images/fork-me-on-github-ribbon.png" alt="Fork me on GitHub"></a>
+
+    <!-- JavaScript libraries -->
+    <script src="javascripts/lib/jquery.min.js"></script>
+    <script src="javascripts/lib/bootstrap.min.js"></script>
+    <script src="javascripts/lib/spin.min.js"></script>
+    <script src="javascripts/lib/ladda.min.js"></script>
+    <script src="javascripts/lib/ie10-viewport-bug-workaround.js"></script>
+    <script src="javascripts/lib/sha256.js"></script>
+    
+    <!-- Distributed blockchain demo script -->
+    <script>
+        // Global variables for difficulty
+        var difficultyMajor = 4; // number of zeros required at front of hash
+        var difficultyMinor = 15; // 0-15, maximum value of the hex digit after the front
+        var pattern = '';
+        
+        // Set up the difficulty pattern
+        for (var x=0; x<difficultyMajor; x++) {
+            pattern += '0';
+        }
+        pattern += difficultyMinor.toString(16);
+        var patternLen = pattern.length;
+        
+        // Function to get text from a block for a specific peer
+        function getText(peer, block) {
+            if (block > 1) {
+                return $('#'+peer+'block'+block+'previous').val() + 
+                       $('#'+peer+'block'+block+'nonce').val() + 
+                       $('#'+peer+'block'+block+'data').val();
+            } else {
+                return $('#'+peer+'block'+block+'nonce').val() + 
+                       $('#'+peer+'block'+block+'data').val();
+            }
+        }
+        
+        // Function to calculate SHA-256 hash for a block of a specific peer
+        function sha256(peer, block) {
+            return CryptoJS.SHA256(getText(peer, block)).toString();
+        }
+        
+        // Function to update the block state (valid/invalid) for a specific peer
+        function updateState(peer, block) {
+            if ($('#'+peer+'block'+block+'hash').val().substr(0, patternLen) <= pattern) {
+                $('#'+peer+'block'+block+'well').removeClass('panel-danger').addClass('panel-success');
+            } else {
+                $('#'+peer+'block'+block+'well').removeClass('panel-success').addClass('panel-danger');
+            }
+        }
+        
+        // Function to update the hash for a block of a specific peer
+        function updateHash(peer, block) {
+            $('#'+peer+'block'+block+'hash').val(sha256(peer, block));
+            updateState(peer, block);
+        }
+        
+        // Function to update the entire blockchain for a specific peer
+        function updateChain(peer) {
+            for (var x = 1; x <= 2; x++) {
+                if (x > 1) {
+                    $('#'+peer+'block'+x+'previous').val($('#'+peer+'block'+(x-1).toString()+'hash').val());
+                }
+                updateHash(peer, x);
+            }
+        }
+        
+        // Function to mine a specific block for a specific peer
+        function mine(peer, block) {
+            var button = $('#'+peer+'mineButton'+block);
+            button.prop('disabled', true);
+            button.text('Mining...');
+            
+            // Use setTimeout to avoid freezing the UI
+            setTimeout(function() {
+                var maximumNonce = 100000; // Limit for demo purposes
+                for (var x = 0; x <= maximumNonce; x++) {
+                    $('#'+peer+'block'+block+'nonce').val(x);
+                    $('#'+peer+'block'+block+'hash').val(sha256(peer, block));
+                    if ($('#'+peer+'block'+block+'hash').val().substr(0, patternLen) <= pattern) {
+                        updateState(peer, block);
+                        // Update subsequent blocks if this is part of a chain
+                        for (var y = block+1; y <= 2; y++) {
+                            $('#'+peer+'block'+y+'previous').val($('#'+peer+'block'+(y-1).toString()+'hash').val());
+                            updateHash(peer, y);
+                        }
+                        break;
+                    }
+                }
+                button.prop('disabled', false);
+                button.text('Mine');
+            }, 100);
+        }
+        
+        // Function to synchronize the network (find the longest valid chain and copy to all peers)
+        function synchronizeNetwork() {
+            // In a real blockchain, we would determine the longest valid chain
+            // For this demo, we'll find which peer has valid blocks and use that chain
+            
+            // Check which peers have valid blocks
+            var peer1Valid = $('#peer1block1well').hasClass('panel-success') && $('#peer1block2well').hasClass('panel-success');
+            var peer2Valid = $('#peer2block1well').hasClass('panel-success') && $('#peer2block2well').hasClass('panel-success');
+            var peer3Valid = $('#peer3block1well').hasClass('panel-success') && $('#peer3block2well').hasClass('panel-success');
+            
+            // Determine which valid chain to use (prioritize peer1, then peer2, then peer3)
+            var sourcePeer = '';
+            if (peer1Valid) {
+                sourcePeer = 'peer1';
+            } else if (peer2Valid) {
+                sourcePeer = 'peer2';
+            } else if (peer3Valid) {
+                sourcePeer = 'peer3';
+            } else {
+                alert('No valid blockchain found among peers. Mine valid blocks first!');
+                return;
+            }
+            
+            // Copy the valid chain to all peers
+            var peers = ['peer1', 'peer2', 'peer3'];
+            
+            for (var i = 0; i < peers.length; i++) {
+                var targetPeer = peers[i];
+                if (targetPeer !== sourcePeer) {
+                    // Copy block 1
+                    $('#'+targetPeer+'block1nonce').val($('#'+sourcePeer+'block1nonce').val());
+                    $('#'+targetPeer+'block1data').val($('#'+sourcePeer+'block1data').val());
+                    
+                    // Copy block 2
+                    $('#'+targetPeer+'block2nonce').val($('#'+sourcePeer+'block2nonce').val());
+                    $('#'+targetPeer+'block2data').val($('#'+sourcePeer+'block2data').val());
+                    
+                    // Update the chain
+                    updateChain(targetPeer);
+                }
+            }
+            
+            alert('Network synchronized! All peers now have the same blockchain from ' + sourcePeer + '.');
+        }
+        
+        // Initialize when the page loads
+        $(document).ready(function() {
+            // Calculate initial hashes and update the chains for all peers
+            updateChain('peer1');
+            updateChain('peer2');
+            updateChain('peer3');
+            
+            // Set up event handlers for peer1
+            $('#peer1block1data, #peer1block1nonce').on('input', function() {
+                updateChain('peer1');
+            });
+            
+            $('#peer1block2data, #peer1block2nonce').on('input', function() {
+                updateHash('peer1', 2);
+            });
+            
+            // Set up event handlers for peer2
+            $('#peer2block1data, #peer2block1nonce').on('input', function() {
+                updateChain('peer2');
+            });
+            
+            $('#peer2block2data, #peer2block2nonce').on('input', function() {
+                updateHash('peer2', 2);
+            });
+            
+            // Set up event handlers for peer3
+            $('#peer3block1data, #peer3block1nonce').on('input', function() {
+                updateChain('peer3');
+            });
+            
+            $('#peer3block2data, #peer3block2nonce').on('input', function() {
+                updateHash('peer3', 2);
+            });
+            
+            // Mine button click handlers for peer1
+            $('#peer1mineButton1').click(function() { mine('peer1', 1); });
+            $('#peer1mineButton2').click(function() { mine('peer1', 2); });
+            
+            // Mine button click handlers for peer2
+            $('#peer2mineButton1').click(function() { mine('peer2', 1); });
+            $('#peer2mineButton2').click(function() { mine('peer2', 2); });
+            
+            // Mine button click handlers for peer3
+            $('#peer3mineButton1').click(function() { mine('peer3', 1); });
+            $('#peer3mineButton2').click(function() { mine('peer3', 2); });
+            
+            // Synchronize network button click handler
+            $('#syncButton').click(function() { synchronizeNetwork(); });
+        });
+    </script>
+</body>
+</html>
