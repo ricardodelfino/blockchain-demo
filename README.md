@@ -93,7 +93,7 @@ quickly though. Here's some time estimates at the various thresholds.
 |14|549,755,813,888,000,000|31,497,291 years
 |15|8,796,093,022,208,000,000|503,956,662 years
 
-In the production bitcoin blockchain, block `458,091` has the hash digest
+In the production btc blockchain, block `458,091` has the hash digest
 `00000000000000000000011246f099d94f91628d71c9d75ad2f9a06e2beb7e92`. That's 21 zeros in a row!
 That one block would take this software approximately 8,454,989,768,407,765 years to mine.
 
@@ -101,9 +101,3 @@ That one block would take this software approximately 8,454,989,768,407,765 year
 
 The 2nd part of the 101 session:
 * https://github.com/anders94/public-private-key-demo
-
-## Send Thanks
-
-![](public/images/qr.png)
-
-Bitcoin gratefully accepted: `1K3NvcuZzVTueHW1qhkG2Cm3viRkh2EXJp`
