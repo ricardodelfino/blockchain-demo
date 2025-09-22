@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tokens - Blockchain Demo</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap-horizon.css">
+    <link rel="stylesheet" href="stylesheets/lib/ladda-themeless.min.css">
+    <link rel="stylesheet" href="stylesheets/blockchain.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <!-- This is the main container for our blockchain demo -->
+    <div class="container">
+        <!-- Header section with title -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Blockchain Demo</h1>
+                <p class="lead">Tokens</p>
+                <p><small>Created by <a href="https://github.com/anders94" target="_blank">Anders Brownworth</a> - <a href="https://github.com/anders94/blockchain-demo" target="_blank">Source Code</a></small></p>
+            </div>
+        </div>
+
+        <!-- Navigation section -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="index.html">Home</a></li>
+                    <li role="presentation"><a href="hash.html">Hash</a></li>
+                    <li role="presentation"><a href="block.html">Block</a></li>
+                    <li role="presentation"><a href="blockchain.html">Blockchain</a></li>
+                    <li role="presentation"><a href="distributed.html">Distributed</a></li>
+                    <li role="presentation" class="active"><a href="tokens.html">Tokens</a></li>
+                    <li role="presentation"><a href="coinbase.html">Coinbase</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main content section -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Tokens explanation -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">What are Blockchain Tokens?</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>Tokens in a blockchain represent digital assets or utilities that can be transferred between addresses. They can represent:</p>
+                        <ul>
+                            <li><strong>Cryptocurrencies</strong>: Digital money like Btc or Ether</li>
+                            <li><strong>Assets</strong>: Representation of physical assets like real estate or gold</li>
+                            <li><strong>Utility</strong>: Access rights to a service or platform</li>
+                            <li><strong>Security</strong>: Digital representation of traditional securities</li>
+                        </ul>
+                        <p>Tokens are tracked on the blockchain through transactions that record transfers from one address to another.</p>
+                    </div>
+                </div>
+
+                <!-- Tokens demo -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Token Transaction Demo</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <!-- Wallets -->
+                            <div class="col-md-6">
+                                <h4>Wallets</h4>
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Address</th>
+                                            <th>Balance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Alice (A)</td>
+                                            <td id="alice-balance">100</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Bob (B)</td>
+                                            <td id="bob-balance">50</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Charlie (C)</td>
+                                            <td id="charlie-balance">75</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                
+                                <h4>Create Transaction</h4>
+                                <form id="transaction-form">
+                                    <div class="form-group">
+                                        <label for="from-address">From:</label>
+                                        <select class="form-control" id="from-address">
+                                            <option value="alice">Alice (A)</option>
+                                            <option value="bob">Bob (B)</option>
+                                            <option value="charlie">Charlie (C)</option>
+                                        </select>
+                                        <p class="help-block">Available balance: <span id="available-balance">100</span> tokens</p>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="to-address">To:</label>
+                                        <select class="form-control" id="to-address">
+                                            <option value="alice">Alice (A)</option>
+                                            <option value="bob" selected>Bob (B)</option>
+                                            <option value="charlie">Charlie (C)</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="amount">Amount:</label>
+                                        <input type="number" class="form-control" id="amount" min="1" value="10">
+                                    </div>
+                                    <button type="button" class="btn btn-primary" id="send-transaction">Send Transaction</button>
+                                </form>
+                            </div>
+                            
+                            <!-- Transaction log -->
+                            <div class="col-md-6">
+                                <h4>Transaction Log</h4>
+                                <div class="well" style="height: 300px; overflow-y: scroll;">
+                                    <ul id="transaction-log" class="list-unstyled">
+                                        <li><strong>Genesis:</strong> Alice starts with 100 tokens</li>
+                                        <li><strong>Genesis:</strong> Bob starts with 50 tokens</li>
+                                        <li><strong>Genesis:</strong> Charlie starts with 75 tokens</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-md-12">
+                                <div class="alert alert-info">
+                                    <p>This is a simplified demonstration of token transactions on a blockchain. In a real blockchain:</p>
+                                    <ul>
+                                        <li>Transactions would be signed with private keys</li>
+                                        <li>Transactions would be grouped into blocks</li>
+                                        <li>Blocks would be mined and added to the blockchain</li>
+                                        <li>The entire network would validate and agree on transactions</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub ribbon -->
+    <a href="https://github.com/ricardodelfino/blockchain-demo" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="images/fork-me-on-github-ribbon.png" alt="Fork me on GitHub"></a>
+
+    <!-- JavaScript libraries -->
+    <script src="javascripts/lib/jquery.min.js"></script>
+    <script src="javascripts/lib/bootstrap.min.js"></script>
+    <script src="javascripts/lib/spin.min.js"></script>
+    <script src="javascripts/lib/ladda.min.js"></script>
+    <script src="javascripts/lib/ie10-viewport-bug-workaround.js"></script>
+    <script src="javascripts/lib/sha256.js"></script>
+    
+    <!-- Tokens demo script -->
+    <script>
+        // Initialize balances
+        var balances = {
+            alice: 100,
+            bob: 50,
+            charlie: 75
+        };
+        
+        // Function to update the displayed balances
+        function updateBalances() {
+            $('#alice-balance').text(balances.alice);
+            $('#bob-balance').text(balances.bob);
+            $('#charlie-balance').text(balances.charlie);
+        }
+        
+        // Function to add a transaction to the log
+        function addTransactionToLog(from, to, amount) {
+            var fromName = from.charAt(0).toUpperCase() + from.slice(1);
+            var toName = to.charAt(0).toUpperCase() + to.slice(1);
+            var timestamp = new Date().toLocaleTimeString();
+            
+            $('#transaction-log').prepend(
+                '<li><strong>' + timestamp + ':</strong> ' + 
+                fromName + ' sent ' + amount + ' tokens to ' + toName + '</li>'
+            );
+        }
+        
+        // Function to process a transaction
+        function processTransaction(from, to, amount) {
+            // Check if the sender has enough balance
+            if (balances[from] < amount) {
+                alert('Insufficient balance!');
+                return false;
+            }
+            
+            // Check if sender and receiver are different
+            if (from === to) {
+                alert('Cannot send tokens to yourself!');
+                return false;
+            }
+            
+            // Process the transaction
+            balances[from] -= amount;
+            balances[to] += amount;
+            
+            // Update the UI
+            updateBalances();
+            addTransactionToLog(from, to, amount);
+            
+            // Reset amount field after successful transaction
+            $('#amount').val('');
+            
+            return true;
+        }
+        
+        // Initialize when the page loads
+        $(document).ready(function() {
+            // Update initial balances
+            updateBalances();
+            
+            // Set up the send transaction button
+            $('#send-transaction').click(function() {
+                var from = $('#from-address').val();
+                var to = $('#to-address').val();
+                var amount = parseInt($('#amount').val());
+                
+                if (isNaN(amount) || amount <= 0) {
+                    alert('Please enter a valid amount!');
+                    return;
+                }
+                
+                processTransaction(from, to, amount);
+            });
+            
+            // Prevent form submission
+            $('#transaction-form').submit(function(e) {
+                e.preventDefault();
+                // Also process the transaction when form is submitted
+                var from = $('#from-address').val();
+                var to = $('#to-address').val();
+                var amount = parseInt($('#amount').val());
+                
+                if (!(isNaN(amount) || amount <= 0)) {
+                    processTransaction(from, to, amount);
+                }
+            });
+            
+            // Update display when from address changes
+            $('#from-address').change(function() {
+                var from = $(this).val();
+                // Show current balance for selected address
+                $('#available-balance').text(balances[from]);
+            });
+        });
+    </script>
+</body>
+</html>

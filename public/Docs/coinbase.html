@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coinbase - Blockchain Demo</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="stylesheets/lib/bootstrap-horizon.css">
+    <link rel="stylesheet" href="stylesheets/lib/ladda-themeless.min.css">
+    <link rel="stylesheet" href="stylesheets/blockchain.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="favicon.ico">
+</head>
+<body>
+    <!-- This is the main container for our blockchain demo -->
+    <div class="container">
+        <!-- Header section with title -->
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Blockchain Demo</h1>
+                <p class="lead">Coinbase</p>
+                <p><small>Created by <a href="https://github.com/anders94" target="_blank">Anders Brownworth</a> - <a href="https://github.com/anders94/blockchain-demo" target="_blank">Source Code</a></small></p>
+            </div>
+        </div>
+
+        <!-- Navigation section -->
+        <div class="row">
+            <div class="col-md-12">
+                <ul class="nav nav-pills">
+                    <li role="presentation"><a href="index.html">Home</a></li>
+                    <li role="presentation"><a href="hash.html">Hash</a></li>
+                    <li role="presentation"><a href="block.html">Block</a></li>
+                    <li role="presentation"><a href="blockchain.html">Blockchain</a></li>
+                    <li role="presentation"><a href="distributed.html">Distributed</a></li>
+                    <li role="presentation"><a href="tokens.html">Tokens</a></li>
+                    <li role="presentation" class="active"><a href="coinbase.html">Coinbase</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Main content section -->
+        <div class="row">
+            <div class="col-md-12">
+                <!-- Coinbase explanation -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">What is a Coinbase Transaction?</h3>
+                    </div>
+                    <div class="panel-body">
+                        <p>A coinbase transaction is the first transaction in a block. It's a special transaction that:</p>
+                        <ul>
+                            <li><strong>Creates new coins</strong>: Generates new cryptocurrency as a reward for mining</li>
+                            <li><strong>Has no inputs</strong>: Unlike regular transactions, it doesn't require previous outputs</li>
+                            <li><strong>Rewards miners</strong>: Provides incentive for miners to secure the network</li>
+                            <li><strong>Includes block reward + fees</strong>: Contains both the block subsidy and transaction fees</li>
+                        </ul>
+                        <p>This mechanism is how new coins enter circulation in proof-of-work blockchains like Btc.</p>
+                    </div>
+                </div>
+
+                <!-- Coinbase demo -->
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Mining Reward Demo</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <!-- Miner section -->
+                            <div class="col-md-6">
+                                <h4>Miner</h4>
+                                <div class="well">
+                                    <p><strong>Miner Address:</strong> Miner123</p>
+                                    <p><strong>Current Balance:</strong> <span id="miner-balance">0</span> coins</p>
+                                    <p><strong>Blocks Mined:</strong> <span id="blocks-mined">0</span></p>
+                                    <button id="mine-block" class="btn btn-primary">Mine New Block</button>
+                                </div>
+                                
+                                <h4>Mining Difficulty</h4>
+                                <div class="form-group">
+                                    <label for="difficulty">Hash must start with:</label>
+                                    <select id="difficulty" class="form-control">
+                                        <option value="0">0 (Easy)</option>
+                                        <option value="00" selected>00 (Medium)</option>
+                                        <option value="000">000 (Hard)</option>
+                                        <option value="0000">0000 (Very Hard)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="reward">Block Reward:</label>
+                                    <select id="reward" class="form-control">
+                                        <option value="50">50 coins (2009-2012)</option>
+                                        <option value="25">25 coins (2012-2016)</option>
+                                        <option value="12.5" selected>12.5 coins (2016-2020)</option>
+                                        <option value="6.25">6.25 coins (2020-2024)</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <!-- Blockchain section -->
+                            <div class="col-md-6">
+                                <h4>Blockchain</h4>
+                                <div class="well" style="height: 400px; overflow-y: scroll;">
+                                    <div id="blockchain">
+                                        <div class="block" id="genesis-block">
+                                            <h5>Genesis Block</h5>
+                                            <p><strong>Block #:</strong> 0</p>
+                                            <p><strong>Previous Hash:</strong> 0000000000000000000000000000000000000000000000000000000000000000</p>
+                                            <p><strong>Transactions:</strong> None (Genesis Block)</p>
+                                            <p><strong>Nonce:</strong> 0</p>
+                                            <p><strong>Hash:</strong> <span class="block-hash">1B2M2Y8AsgTpgAmY7PhCfg==</span></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-md-12">
+                                <div class="alert alert-info">
+                                    <p><strong>How Mining Works:</strong></p>
+                                    <ol>
+                                        <li>The miner collects pending transactions into a block</li>
+                                        <li>The miner adds a special coinbase transaction that pays themselves the block reward</li>
+                                        <li>The miner tries different nonce values until finding one that produces a hash starting with the required number of zeros</li>
+                                        <li>When a valid hash is found, the block is added to the blockchain</li>
+                                        <li>The miner receives the block reward as newly created coins</li>
+                                    </ol>
+                                    <p>This process secures the blockchain while distributing new coins in a fair way based on computational work.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GitHub ribbon -->
+    <a href="https://github.com/ricardodelfino/blockchain-demo" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="images/fork-me-on-github-ribbon.png" alt="Fork me on GitHub"></a>
+
+    <!-- JavaScript libraries -->
+    <script src="javascripts/lib/jquery.min.js"></script>
+    <script src="javascripts/lib/bootstrap.min.js"></script>
+    <script src="javascripts/lib/spin.min.js"></script>
+    <script src="javascripts/lib/ladda.min.js"></script>
+    <script src="javascripts/lib/ie10-viewport-bug-workaround.js"></script>
+    <script src="javascripts/lib/sha256.js"></script>
+    
+    <!-- Coinbase demo script -->
+    <script>
+        // Initialize variables
+        var minerBalance = 0;
+        var blocksMined = 0;
+        var mining = false; // Flag to prevent multiple mining operations
+        var blockchain = [{
+            index: 0,
+            previousHash: '0000000000000000000000000000000000000000000000000000000000000000',
+            timestamp: new Date().getTime(),
+            transactions: [],
+            nonce: 0,
+            hash: '1B2M2Y8AsgTpgAmY7PhCfg=='
+        }];
+        
+        // Function to calculate hash
+        function calculateHash(index, previousHash, timestamp, transactions, nonce) {
+            return sha256(index + previousHash + timestamp + JSON.stringify(transactions) + nonce);
+        }
+        
+        // Function to mine a block
+        function mineBlock() {
+            // Prevent multiple mining operations
+            if (mining) {
+                return;
+            }
+            
+            mining = true;
+            
+            // Get current values
+            var difficulty = $('#difficulty').val();
+            var reward = parseFloat($('#reward').val());
+            var lastBlock = blockchain[blockchain.length - 1];
+            
+            // Create new block
+            var newIndex = lastBlock.index + 1;
+            var previousHash = lastBlock.hash;
+            var timestamp = new Date().getTime();
+            
+            // Create coinbase transaction
+            var coinbaseTransaction = {
+                from: 'Network',
+                to: 'Miner123',
+                amount: reward,
+                type: 'coinbase'
+            };
+            
+            var transactions = [coinbaseTransaction];
+            var nonce = 0;
+            var hash = '';
+            var startTime = Date.now();
+            
+            // Show mining in progress
+            $('#mine-block').prop('disabled', true).text('Mining in progress...');
+            
+            // Start mining process (with setTimeout to not freeze the UI)
+            setTimeout(function miningProcess() {
+                // Try to find a valid hash
+                hash = calculateHash(newIndex, previousHash, timestamp, transactions, nonce);
+                
+                // Check if hash meets difficulty
+                if (hash.substring(0, difficulty.length) === difficulty) {
+                    // Valid hash found!
+                    var endTime = Date.now();
+                    var miningTime = (endTime - startTime) / 1000; // in seconds
+                    
+                    var newBlock = {
+                        index: newIndex,
+                        previousHash: previousHash,
+                        timestamp: timestamp,
+                        transactions: transactions,
+                        nonce: nonce,
+                        hash: hash,
+                        miningTime: miningTime
+                    };
+                    
+                    // Add block to blockchain
+                    blockchain.push(newBlock);
+                    
+                    // Update miner stats
+                    minerBalance += reward;
+                    blocksMined++;
+                    
+                    // Update UI
+                    updateUI(newBlock);
+                    
+                    // Re-enable mining button
+                    $('#mine-block').prop('disabled', false).text('Mine New Block');
+                    mining = false;
+                } else {
+                    // Try next nonce
+                    nonce++;
+                    
+                    // To prevent UI freezing, use setTimeout for next iteration
+                    if (nonce % 100 === 0) { // Check every 100 attempts
+                        setTimeout(miningProcess, 0);
+                    } else {
+                        miningProcess();
+                    }
+                    
+                    // If taking too long, give up
+                    if (nonce > 500000) {
+                        $('#mine-block').prop('disabled', false).text('Mine New Block');
+                        mining = false;
+                        alert('Mining failed - difficulty too high!');
+                        return;
+                    }
+                }
+            }, 0);
+        }
+        
+        // Function to update the UI
+        function updateUI(newBlock) {
+            // Update miner stats
+            $('#miner-balance').text(minerBalance);
+            $('#blocks-mined').text(blocksMined);
+            
+            // Add new block to blockchain display
+            var blockHtml = '<div class="block">' +
+                '<h5>Block #' + newBlock.index + '</h5>' +
+                '<p><strong>Previous Hash:</strong> ' + newBlock.previousHash.substring(0, 20) + '...</p>' +
+                '<p><strong>Transactions:</strong> 1 (Coinbase: ' + newBlock.transactions[0].amount + ' coins)</p>' +
+                '<p><strong>Nonce:</strong> ' + newBlock.nonce + '</p>' +
+                '<p><strong>Hash:</strong> <span class="block-hash">' + newBlock.hash.substring(0, 20) + '...</span></p>' +
+                (newBlock.miningTime ? '<p><strong>Mining Time:</strong> ' + newBlock.miningTime.toFixed(2) + ' seconds</p>' : '') +
+                '</div>';
+            
+            $('#blockchain').append(blockHtml);
+            
+            // Scroll to the bottom of the blockchain
+            var blockchainDiv = $('#blockchain').parent();
+            blockchainDiv.scrollTop(blockchainDiv[0].scrollHeight);
+        }
+        
+        // Set up event handlers when the page loads
+        $(document).ready(function() {
+            $('#mine-block').click(function() {
+                mineBlock();
+            });
+        });
+    </script>
+</body>
+</html>
